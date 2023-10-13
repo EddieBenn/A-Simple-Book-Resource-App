@@ -57,6 +57,6 @@ export const loginAuthorSchema = object({
     password: string({
       required_error: 'Password is required',
     })
-    .min(6, 'Phone number must be at least 6 character(s)'),
+    .min(6, 'Password must be at least 6 character(s)'),
   }),
 });
