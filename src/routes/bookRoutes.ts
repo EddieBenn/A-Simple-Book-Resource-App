@@ -20,7 +20,7 @@ const router = express.Router();
 //book routes
 router.get("/home", getHomePage);
 router.get("/book/:id", protect, getBook);
-router.get("/books", protect, getAllBooks);
+router.get("/books", protect, pagination(Book), getAllBooks);
 router.get("/create", protect, getAddBookPage);
 router.get("/books/myBooks", protect, getMyBooks);
 router.get("/update/:id", protect, getUpdateBookPage);

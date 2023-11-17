@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, NextFunction } from "express";
 
 export function pagination(model: any) {
   return async function paginate(req: Request, res: any, next: NextFunction) {
@@ -26,24 +26,24 @@ export function pagination(model: any) {
 
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
-    const result: { [key: string]: { [key: string]: number } } = {};
+    const results: any = {};
 
     if (endIndex < (await model.countDocuments().exec())) {
-      result.next = {
+      results.next = {
         page: page + 1,
         limit: limit,
       };
     }
     if (startIndex > 0) {
-      result.previous = {
+      results.previous = {
         page: page - 1,
         limit: limit,
       };
     }
     try {
-      result.users = await model.find().limit(limit).skip(startIndex).exec();
+      results.results = await model.find().limit(limit).skip(startIndex).exec();
       //   res.status(200).send(result);
-      res.paginatedResult = result;
+      res.paginatedResults = results;
       next();
     } catch (err) {
       res.status(404).json({
