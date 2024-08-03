@@ -10,7 +10,7 @@ router.get('/register', getRegisterPage);
 router.get('/login', getLoginPage);
 router.post('/login', validate(loginAuthorSchema), loginAuthor);
 router.post('/register', validate(createAuthorSchema), registerAuthor);
-router.get('/logout', protect, logoutAuthor);
+router.post('/logout', protect, logoutAuthor);
 
 
 

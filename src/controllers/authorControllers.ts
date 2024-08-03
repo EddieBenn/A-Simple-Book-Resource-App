@@ -94,23 +94,11 @@ export const getLoginPage =  async (req: Request, res: Response) => {
   };
   
   
-  export const logoutAuthor = async (req: JwtPayload, res: Response) => {
+  export const logoutAuthor = async (res: Response) => {
     // const token = req.cookies.token
-    // console.log("You have successfully logged out");
     res.clearCookie("token");
+    console.log("You have successfully logged out");
 
-    if (typeof window !== 'undefined') {
-      console.log('You are on the browser')
-      // can use localStorage here
-    } else {
-      console.log('You are on the server')
-      // can't use localStorage
-    }
-    
-    // const remove = localStorage.clear();
-    
-    // { domain: 'http://localhost:3005', path: '/authors/logout' });
-    await req.author.save();
     res.status(200).redirect('/authors/login');
   }
 
